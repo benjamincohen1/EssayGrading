@@ -8,7 +8,7 @@ def main():
 	arff = open("essays.arff", "w")
 
 
-	feature_functions = [length, avg_word_length, avg_sentence_length, num_yous, percent_distinct_words]    
+	feature_functions = [length, avg_word_length, avg_sentence_length, avg_long_words, num_yous, percent_distinct_words]    
 									  #to add more features, just define
 
 									  #the functions and add to this list
@@ -70,6 +70,9 @@ def num_yous(essay):
 
 def percent_distinct_words(essay):
 	return float(len(set([x.lower() for x in essay.split()]))) / len([x.lower() for x in essay.split()])
+
+def avg_long_words(essay):
+	return float(len([x.lower for x in essay.split if x.len > 5]) / len([x.lower for x in essay.split()]))
 
 def average(l):
 	s, s1 = 0,0.0
