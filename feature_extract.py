@@ -47,15 +47,19 @@ def main():
 	clf = clf.fit(X, Y)
 
 	yes, no = 0.0, 0.0
+	err = 0
 	for line in testSet:
 		a = activate(feature_functions, line, clf)
 
-		if a:
+		if a[0]:
 			yes += 1
 		else:
 			no += 1
 
+		err += a[1]
+
 	print "Accuracy: " + str(yes/(yes+no))
+	print "err: " + str(err)
 
 
 def avg_word_length(essay):
@@ -122,7 +126,7 @@ def activate(feature_funcitons, line, classifier):
 
 	score = int(score)
 	scores = [score]
-	return int(classifiedScore) in scores
+	return ((int(classifiedScore) in scores),abs(int(score - int(classifiedScore)))
 
 
 def extract_features(feature_funcitons, line, arff):
